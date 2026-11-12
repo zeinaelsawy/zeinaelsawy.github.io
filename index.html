@@ -5,406 +5,350 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Portfolio of Zeina Elsawy: game design, web development and cybersecurity.">
 <title>Zeina Elsawy Portfolio</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Chakra+Petch:ital,wght@0,400;0,500;0,600;0,700;1,400&family=VT323&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <style>
-/* Layout: an arcade title screen that leads to a "choose your class" select; each class opens its own
-   world of levels (projects) drawn as hard-edged pixel panels. Single deliberate look: a night arcade cabinet. */
+/* Layout: a glowing ember-coloured hero card with a soft rounded base sits on a near-black page;
+   below it, wide two-column bands (orange eyebrow + heavy heading left, text right) and rounded work cards. */
 :root {
   color-scheme: dark;
-  --night: #15122e;
-  --panel: #221d4a;
-  --panel-2: #2c2660;
-  --edge: #0b0920;
-  --ink: #f6f2ff;
-  --dim: #b9b2dc;
-  --pink: #ff4f9a;
-  --cyan: #3ee6e0;
-  --gold: #ffd23f;
-  --pixel: "Press Start 2P", "Courier New", monospace;
-  --body: "Chakra Petch", "Trebuchet MS", "Segoe UI", sans-serif;
-  --readout: "VT323", "Courier New", monospace;
+  --ground: #0e0e0f;
+  --card: #18181a;
+  --card-2: #212124;
+  --line: #2e2e32;
+  --ink: #ffffff;
+  --soft: #a9a9b2;
+  --ember: #ff5a1f;
+  --ember-deep: #b3200f;
+  --sans: "Plus Jakarta Sans", "Segoe UI", Helvetica, Arial, sans-serif;
 }
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body {
-  margin: 0; background: var(--night); color: var(--ink);
-  font-family: var(--body); font-size: 1.0625rem; line-height: 1.6;
-  background-image:
-    radial-gradient(circle at 12% 8%, rgba(255,79,154,0.16), transparent 34rem),
-    radial-gradient(circle at 88% 30%, rgba(62,230,224,0.12), transparent 30rem);
-  background-repeat: no-repeat;
-}
+body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--sans); font-size: 1.0625rem; line-height: 1.6; }
 img { max-width: 100%; }
-.wrap {
-  max-width: 70rem; margin-inline: auto; padding-block: 2.5rem 4rem;
+.page {
+  max-width: 76rem; margin-inline: auto; padding-block: 1rem 4rem;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
-  display: flex; flex-direction: column; gap: 4.5rem;
+  display: flex; flex-direction: column; gap: 6rem;
 }
-h1, h2, h3, h4 { margin: 0; font-family: var(--pixel); font-weight: 400; text-transform: uppercase; line-height: 1.35; text-wrap: balance; }
-h1 { font-size: clamp(2rem, 9vw, 5rem); line-height: 1.15; text-shadow: 0.07em 0.07em 0 var(--pink), 0.14em 0.14em 0 var(--edge); }
-h1 span { display: block; }
-h2 { font-size: clamp(1.05rem, 3.4vw, 1.7rem); }
-h3 { font-size: clamp(0.85rem, 2.4vw, 1.05rem); }
-h4 { font-size: 0.72rem; }
-p { margin: 0; max-width: 62ch; }
-a { color: var(--cyan); text-underline-offset: 0.2em; }
-a:hover { color: var(--gold); }
-:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
-.tag { font-family: var(--pixel); font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold); line-height: 1.6; }
-.dim { color: var(--dim); }
-.readout { font-family: var(--readout); font-size: 1.3rem; line-height: 1.25; letter-spacing: 0.02em; }
+h1, h2, h3 { margin: 0; font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; text-wrap: balance; }
+h1 { font-size: clamp(3rem, 11vw, 7.5rem); line-height: 0.95; }
+h2 { font-size: clamp(2rem, 5vw, 3.4rem); }
+h3 { font-size: 1.4rem; letter-spacing: -0.02em; line-height: 1.2; }
+p { margin: 0; max-width: 60ch; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.eyebrow { color: var(--ember); font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; }
+.soft { color: var(--soft); }
+.small { font-size: 0.9rem; }
 
-/* HUD */
-.hud { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 2rem; font-family: var(--pixel); font-size: 0.6rem; text-transform: uppercase; color: var(--dim); line-height: 1.8; }
-.hud b { color: var(--cyan); font-weight: 400; }
+/* pill button */
+.pill { display: inline-flex; align-items: center; gap: 0.9rem; background: var(--ink); color: #111; text-decoration: none; font-weight: 700; font-size: 0.9rem; padding: 0.35rem 0.35rem 0.35rem 1.2rem; border-radius: 99px; white-space: nowrap; }
+.pill i { display: grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: 50%; background: var(--ember); color: var(--ink); font-style: normal; font-size: 1rem; transition: transform 0.2s ease; }
+.pill:hover i { transform: translateX(3px); }
+.band .right .pill { align-self: flex-start; }
+.pill.ember { background: var(--ember); color: var(--ink); }
+.pill.ember i { background: var(--ink); color: var(--ember); }
 
-/* Title screen */
-.title { display: flex; flex-direction: column; gap: 1.75rem; align-items: flex-start; padding-block: 1.5rem 0; }
-.title .lede { font-size: 1.2rem; max-width: 50ch; }
-.btn {
-  display: inline-block; font-family: var(--pixel); font-size: 0.78rem; text-transform: uppercase; text-decoration: none; line-height: 1.5;
-  color: var(--edge); background: var(--gold); padding: 1rem 1.3rem; border: 0; cursor: pointer;
-  box-shadow: 0 0 0 4px var(--edge), 6px 6px 0 4px var(--pink);
-  transition: transform 0.08s steps(2), box-shadow 0.08s steps(2);
+/* hero */
+.hero-shell { background: var(--card); border-radius: 2.5rem; }
+.hero {
+  position: relative; overflow: hidden; border-radius: 0 0 2.5rem 2.5rem; border-top-left-radius: 1rem; border-top-right-radius: 1rem;
+  padding: 1.5rem clamp(1.25rem, 3.5vw, 2.5rem) 2.5rem;
+  display: flex; flex-direction: column; gap: clamp(3rem, 9vw, 6.5rem);
+  background:
+    radial-gradient(60rem 34rem at 78% 18%, rgba(255,170,90,0.55), transparent 60%),
+    radial-gradient(46rem 30rem at 10% 0%, #ff6a2a, transparent 70%),
+    linear-gradient(160deg, #ff4d1c 0%, var(--ember-deep) 48%, #2a0d0a 100%);
 }
-.btn:hover { color: var(--edge); transform: translate(3px, 3px); box-shadow: 0 0 0 4px var(--edge), 3px 3px 0 4px var(--pink); }
-.btn.alt { background: var(--cyan); }
-.btn .blink { animation: blink 1s steps(1) infinite; }
-@keyframes blink { 50% { opacity: 0; } }
-.links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.6rem; }
-.links span { user-select: all; }
+.hero::after { content: ""; position: absolute; right: -6rem; bottom: -10rem; width: 30rem; height: 30rem; border-radius: 50%; background: radial-gradient(circle, rgba(20,8,6,0.75), transparent 68%); pointer-events: none; }
+.hero > * { position: relative; z-index: 1; }
+nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.brand { font-weight: 800; font-size: 1.25rem; letter-spacing: -0.03em; text-decoration: none; }
+.nav-links { display: flex; align-items: center; gap: 2rem; font-size: 0.9rem; font-weight: 500; }
+.nav-links a:not(.pill) { text-decoration: none; opacity: 0.9; }
+.nav-links a:not(.pill):hover { opacity: 1; text-decoration: underline; text-underline-offset: 0.3em; }
+.hero-main { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 2rem; align-items: end; }
+.hero-main > * { min-width: 0; }
+.hey { font-size: clamp(1.2rem, 2.6vw, 1.7rem); font-weight: 600; margin-bottom: 0.6rem; }
+.aside { display: flex; flex-direction: column; gap: 0.8rem; }
+.aside strong { font-size: clamp(1.2rem, 2.4vw, 1.6rem); font-weight: 700; line-height: 1.25; letter-spacing: -0.02em; }
+.aside span { font-size: 0.92rem; opacity: 0.85; }
+.areas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.25rem; }
+.areas li { display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.92rem; min-width: 0; }
+.areas b { font-size: 0.8rem; font-weight: 700; }
+.areas b::before { content: "#"; color: #ffb38f; }
+.worked { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 3rem; padding: 2rem clamp(1.25rem, 3.5vw, 2.5rem) 2.25rem; }
+.worked .lead { font-size: 0.78rem; font-weight: 700; max-width: 9rem; line-height: 1.35; }
+.worked ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.75rem 2.75rem; flex: 1; }
+.worked li { font-weight: 800; font-size: 1.2rem; letter-spacing: -0.03em; display: flex; align-items: center; gap: 0.55rem; }
+.worked li::before { content: ""; width: 0.9rem; height: 0.9rem; border-radius: 50%; border: 3px solid var(--soft); }
 
-/* Panels */
-.panel { background: var(--panel); box-shadow: 0 0 0 4px var(--edge), 8px 8px 0 4px rgba(11,9,32,0.9); padding: 1.5rem; }
-.sec { display: flex; flex-direction: column; gap: 1.5rem; }
-.sec-head { display: flex; flex-direction: column; gap: 0.8rem; }
+/* bands */
+.band { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2rem 4rem; align-items: start; }
+.band > * { min-width: 0; }
+.band .left { display: flex; flex-direction: column; gap: 1rem; }
+.band .right { display: flex; flex-direction: column; gap: 1.5rem; }
+.band .right .big { font-size: clamp(1.15rem, 2.2vw, 1.45rem); font-weight: 700; line-height: 1.4; letter-spacing: -0.02em; }
+section { display: flex; flex-direction: column; gap: 2.5rem; scroll-margin-top: 1.5rem; }
 
-/* Class select */
-.classes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.75rem; }
-.class {
-  text-align: left; font: inherit; color: var(--ink); cursor: pointer; border: 0; min-width: 0;
-  display: flex; flex-direction: column; gap: 0.9rem; padding: 1.5rem; background: var(--panel);
-  box-shadow: 0 0 0 4px var(--edge), 8px 8px 0 4px rgba(11,9,32,0.9);
-  transition: transform 0.08s steps(2);
+/* work cards */
+.work { display: grid; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); gap: 1.5rem; }
+.wcard { background: var(--card); border-radius: 1.75rem; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+.wcard img { display: block; width: 100%; height: auto; }
+.wcard .in { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.8rem; }
+.kicker { font-size: 0.78rem; font-weight: 700; color: var(--ember); text-transform: uppercase; letter-spacing: 0.08em; }
+.meta { margin: 0; display: grid; grid-template-columns: 5.5rem minmax(0, 1fr); gap: 0.3rem 0.9rem; font-size: 0.9rem; }
+.meta dt { color: var(--soft); }
+.meta dd { margin: 0; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.5rem; }
+.tile { background: var(--card); border-radius: 1.5rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.7rem; min-width: 0; }
+.tile.glow { background: linear-gradient(150deg, #ff5a1f, #9c1d0d); }
+.tile.glow .kicker { color: #ffd9c7; }
+figure { margin: 0; background: var(--card); border-radius: 1.75rem; overflow: hidden; }
+figure img { display: block; width: 100%; height: auto; }
+figcaption { padding: 1rem 1.5rem 1.25rem; font-size: 0.9rem; color: var(--soft); }
+.feature { background: var(--card); border-radius: 2rem; padding: clamp(1.5rem, 4vw, 3rem); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2rem 3rem; }
+.feature > * { min-width: 0; }
+.feature ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.feature li { padding-block: 0.9rem; border-top: 1px solid var(--line); display: flex; flex-direction: column; }
+.feature li:last-child { border-bottom: 1px solid var(--line); }
+.feature li b { font-weight: 700; }
+
+/* timeline */
+.jobs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.jobs li { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 0.4rem 2rem; padding-block: 1.5rem; border-top: 1px solid var(--line); }
+.jobs li:last-child { border-bottom: 1px solid var(--line); }
+.jobs li > * { min-width: 0; }
+.jobs .when { color: var(--soft); font-size: 0.9rem; font-weight: 600; padding-top: 0.3rem; }
+.jobs .what { display: flex; flex-direction: column; gap: 0.3rem; }
+.jobs .role { color: var(--ember); font-weight: 700; font-size: 0.95rem; }
+.chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chips li { border: 1px solid var(--line); background: var(--card-2); border-radius: 99px; padding: 0.3rem 0.85rem; font-size: 0.88rem; font-weight: 500; }
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 2rem; }
+.skills > div { display: flex; flex-direction: column; gap: 0.9rem; min-width: 0; }
+
+.cta { border-radius: 2.5rem; padding: clamp(2rem, 6vw, 4.5rem); background: radial-gradient(40rem 24rem at 85% 10%, rgba(255,170,90,0.5), transparent 60%), linear-gradient(150deg, #ff4d1c, var(--ember-deep) 60%, #2a0d0a); display: flex; flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+.cta .mail { font-size: clamp(1.1rem, 3.4vw, 1.9rem); font-weight: 700; letter-spacing: -0.02em; user-select: all; overflow-wrap: anywhere; }
+.row { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 2rem; color: var(--soft); font-size: 0.88rem; }
+
+@media (max-width: 52rem) {
+  .hero-main, .band, .feature { grid-template-columns: minmax(0, 1fr); }
+  .areas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .nav-links a:not(.pill) { display: none; }
+  .jobs li { grid-template-columns: minmax(0, 1fr); }
+  .worked .lead { max-width: none; flex-basis: 100%; }
+  .worked ul { gap: 0.6rem 1.75rem; }
+  .page { gap: 4rem; }
+  .hero-shell, .hero { border-bottom-left-radius: 1.75rem; border-bottom-right-radius: 1.75rem; }
+  .hero-shell { border-radius: 1.75rem; }
 }
-.class:hover { transform: translate(-2px, -2px); }
-.class .sprite { width: 4.5rem; height: 4.5rem; image-rendering: pixelated; }
-.class[aria-selected="true"] { background: var(--panel-2); box-shadow: 0 0 0 4px var(--gold), 8px 8px 0 4px var(--pink); }
-.class[aria-selected="true"] .pick::before { content: "▶ SELECTED"; color: var(--gold); }
-.class .pick::before { content: "SELECT"; color: var(--dim); }
-.class .pick { font-family: var(--pixel); font-size: 0.6rem; }
-.chips { display: flex; flex-wrap: wrap; gap: 0.45rem; list-style: none; margin: 0; padding: 0; }
-.chips li { font-family: var(--readout); font-size: 1.15rem; line-height: 1; padding: 0.3rem 0.55rem; background: var(--edge); color: var(--cyan); }
-
-/* Worlds */
-.world { display: flex; flex-direction: column; gap: 3.5rem; }
-.js .world[hidden] { display: none; }
-.level { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 1.75rem; align-items: start; }
-.level > * { min-width: 0; }
-.level img { display: block; width: 100%; height: auto; box-shadow: 0 0 0 4px var(--edge); }
-.level .info { display: flex; flex-direction: column; gap: 0.9rem; }
-.num { font-family: var(--pixel); font-size: 0.62rem; color: var(--pink); }
-dl { margin: 0; display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: 0.35rem 1rem; }
-dt { font-family: var(--pixel); font-size: 0.55rem; text-transform: uppercase; color: var(--dim); padding-top: 0.55em; line-height: 1.5; }
-dd { margin: 0; font-family: var(--readout); font-size: 1.25rem; line-height: 1.2; color: var(--ink); }
-
-.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.75rem; }
-.card { display: flex; flex-direction: column; gap: 0.6rem; min-width: 0; }
-.card .status { font-family: var(--pixel); font-size: 0.55rem; color: var(--cyan); }
-figure { margin: 0; }
-figure img { display: block; width: 100%; height: auto; box-shadow: 0 0 0 4px var(--edge); }
-figcaption { font-size: 0.88rem; color: var(--dim); margin-top: 0.8rem; }
-
-.quests { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1.25rem; }
-.quest { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 0.5rem 1.5rem; }
-.quest > * { min-width: 0; }
-.quest .when { font-family: var(--readout); font-size: 1.2rem; color: var(--gold); line-height: 1.3; }
-.quest .body { display: flex; flex-direction: column; gap: 0.35rem; }
-.quest .role { font-weight: 600; color: var(--cyan); }
-
-.save { display: flex; flex-wrap: wrap; gap: 1.5rem; }
-footer { display: flex; flex-direction: column; gap: 1.25rem; align-items: flex-start; }
-.credit { font-family: var(--pixel); font-size: 0.55rem; color: var(--dim); line-height: 1.8; }
-
-@media (max-width: 46rem) {
-  .classes, .level { grid-template-columns: minmax(0, 1fr); }
-  .quest { grid-template-columns: minmax(0, 1fr); }
-  dl { grid-template-columns: minmax(0, 1fr); gap: 0; }
-  dd { margin-bottom: 0.5rem; }
-  .wrap { gap: 3.25rem; }
-  .panel, .class { padding: 1.15rem; }
-}
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .btn .blink { animation: none; }
-  .btn, .class { transition: none; }
-}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .pill i { transition: none; } }
 </style>
 </head>
 <body>
 
-<div class="wrap">
+<div class="page" id="home">
 
-  <div class="hud" aria-hidden="true">
-    <span>Player <b>1</b></span>
-    <span>Stage <b>Final year</b></span>
-    <span>Base <b>Cairo, Egypt</b></span>
+  <div class="hero-shell">
+    <header class="hero">
+      <nav aria-label="Main">
+        <a class="brand" href="#home">Zeina Elsawy</a>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#work">Design work</a>
+          <a href="#security">Security</a>
+          <a href="#cv">CV</a>
+          <a class="pill" href="#contact">Get in touch <i aria-hidden="true">→</i></a>
+        </div>
+      </nav>
+
+      <div class="hero-main">
+        <div>
+          <p class="hey">Hey, I'm Zeina, a</p>
+          <h1>Game Designer &amp; Builder</h1>
+        </div>
+        <div class="aside">
+          <strong>I design games, build for the web and work in cybersecurity.</strong>
+          <span>Final-year student at the American University in Cairo, graduating Spring 2027.</span>
+        </div>
+      </div>
+
+      <ul class="areas">
+        <li><b>01</b>Game Design</li>
+        <li><b>02</b>Web Development</li>
+        <li><b>03</b>Layout and Graphics</li>
+        <li><b>04</b>Cybersecurity</li>
+      </ul>
+    </header>
+
+    <div class="worked">
+      <span class="lead">Places I've worked and studied</span>
+      <ul>
+        <li>Etisalat Egypt</li>
+        <li>AUC</li>
+        <li>PDPC</li>
+        <li>eFinance</li>
+      </ul>
+    </div>
   </div>
 
-  <header class="title">
-    <p class="tag">Game design · Web · Cybersecurity</p>
-    <h1><span>Zeina</span><span>Elsawy</span></h1>
-    <p class="lede">I design games, build for the web and work in cybersecurity. I'm finishing a B.Sc. in Cybersecurity with a Minor in Game Design at the American University in Cairo, graduating Spring 2027.</p>
-    <a class="btn" href="#select"><span class="blink">▶</span> Press start</a>
-    <div class="links">
-      <span>Zeinaelsawy04@gmail.com</span>
-      <a href="https://linkedin.com/in/zeinaelsawy">LinkedIn</a>
-      <a href="https://github.com/zeinaelsawy">GitHub</a>
-      <a href="https://canva.link/zeinaelsawygameconcepts">Full design deck</a>
-    </div>
-  </header>
-
-  <section class="sec" id="select">
-    <div class="sec-head">
-      <p class="tag">Character select</p>
-      <h2>Choose your class</h2>
-      <p class="dim">I study cybersecurity and minor in game design, and I like both for the same reason: each is about understanding a system well enough to shape how people move through it. Pick a side to see the work.</p>
-    </div>
-    <div class="classes" role="tablist" aria-label="Choose a class">
-      <button class="class" role="tab" id="tab-design" aria-controls="design" aria-selected="true" data-world="design">
-        <svg class="sprite" viewBox="0 0 9 9" shape-rendering="crispEdges" aria-hidden="true">
-          <rect x="6" y="0" width="2" height="2" fill="#ffd23f"/><rect x="5" y="2" width="2" height="2" fill="#ff4f9a"/>
-          <rect x="4" y="3" width="2" height="2" fill="#ff4f9a"/><rect x="3" y="4" width="2" height="2" fill="#ff4f9a"/>
-          <rect x="2" y="5" width="2" height="2" fill="#f6f2ff"/><rect x="1" y="6" width="2" height="2" fill="#f6f2ff"/>
-          <rect x="0" y="8" width="2" height="1" fill="#3ee6e0"/>
-        </svg>
-        <h3>The Designer</h3>
-        <p>Game concepts, playable games, level design and a full-stack web app.</p>
-        <ul class="chips"><li>Figma</li><li>Photoshop</li><li>Illustrator</li><li>InDesign</li><li>HTML/CSS/JS</li></ul>
-        <span class="pick"></span>
-      </button>
-      <button class="class" role="tab" id="tab-security" aria-controls="security" aria-selected="false" data-world="security">
-        <svg class="sprite" viewBox="0 0 9 9" shape-rendering="crispEdges" aria-hidden="true">
-          <rect x="1" y="0" width="7" height="1" fill="#3ee6e0"/><rect x="1" y="1" width="1" height="5" fill="#3ee6e0"/>
-          <rect x="7" y="1" width="1" height="5" fill="#3ee6e0"/><rect x="2" y="1" width="5" height="5" fill="#221d4a"/>
-          <rect x="2" y="6" width="1" height="1" fill="#3ee6e0"/><rect x="6" y="6" width="1" height="1" fill="#3ee6e0"/>
-          <rect x="3" y="7" width="1" height="1" fill="#3ee6e0"/><rect x="5" y="7" width="1" height="1" fill="#3ee6e0"/>
-          <rect x="4" y="8" width="1" height="1" fill="#3ee6e0"/><rect x="4" y="2" width="1" height="3" fill="#ffd23f"/>
-          <rect x="3" y="3" width="3" height="1" fill="#ffd23f"/>
-        </svg>
-        <h3>The Defender</h3>
-        <p>Security operations, data privacy, and attack and hardware projects.</p>
-        <ul class="chips"><li>SIEM</li><li>EDR</li><li>ISO 27001</li><li>Python</li><li>Verilog</li></ul>
-        <span class="pick"></span>
-      </button>
+  <section id="about">
+    <div class="band">
+      <div class="left">
+        <p class="eyebrow">Behind the work</p>
+        <h2>Two sides, one way of working</h2>
+      </div>
+      <div class="right">
+        <p class="big">I study cybersecurity and minor in game design, and I like both for the same reason: each is about understanding a system well enough to shape how people move through it.</p>
+        <p class="soft">In games that means rules, levels and feel. In security it means knowing where a system breaks. Alongside my degree I lay out pages for the AUC Caravan newsletter and lead a student team at HEYA Does.</p>
+        <a class="pill ember" href="#contact">Get in touch <i aria-hidden="true">→</i></a>
+      </div>
     </div>
   </section>
 
-  <!-- ===================== DESIGNER ===================== -->
-  <div class="world" id="design" role="tabpanel" aria-labelledby="tab-design">
-
-    <section class="sec">
-      <div class="sec-head">
-        <p class="tag">World 1 · Game concepts</p>
+  <section id="work">
+    <div class="band">
+      <div class="left">
+        <p class="eyebrow">Game concepts</p>
         <h2>Three original games</h2>
-        <p class="dim">Each one targets a different platform and asks the player for a different skill: spatial teamwork, deduction and timing.</p>
       </div>
-
-      <article class="panel level">
+      <div class="right">
+        <p class="soft">Each one targets a different platform and asks the player for a different skill: spatial teamwork, deduction and timing. The <a href="https://canva.link/zeinaelsawygameconcepts">full design deck</a> has the rules, controls and case studies.</p>
+      </div>
+    </div>
+    <div class="work">
+      <article class="wcard">
         <img src="img/daydream.png" alt="Design deck page for Daydream, describing the Desk and the Garden player roles" width="596" height="336">
-        <div class="info">
-          <span class="num">Level 1-1</span>
+        <div class="in">
+          <span class="kicker">PC · Co-op</span>
           <h3>Daydream</h3>
-          <p>An asymmetric local co-op puzzle game. One player arranges real desk objects with the mouse while the other platforms through a daydream garden below. Drop a heavy object on your partner and the level resets.</p>
-          <dl>
-            <dt>Platform</dt><dd>PC, two-player co-op</dd>
-            <dt>Skill</dt><dd>Spatial teamwork, constant communication</dd>
-            <dt>Controls</dt><dd>Mouse drag + scroll / WASD, Space, Shift</dd>
-            <dt>Inspired by</dt><dd>It Takes Two, Monument Valley</dd>
-          </dl>
+          <p class="soft small">One player arranges real desk objects with the mouse while the other platforms through a daydream garden below. Drop a heavy object on your partner and the level resets.</p>
+          <dl class="meta"><dt>Skill</dt><dd>Spatial teamwork</dd><dt>Inspired by</dt><dd>It Takes Two, Monument Valley</dd></dl>
         </div>
       </article>
-
-      <article class="panel level">
+      <article class="wcard">
         <img src="img/neural.png" alt="Design deck page for The Neural Timescale, describing minigame decryption and the corkboard system" width="596" height="336">
-        <div class="info">
-          <span class="num">Level 1-2</span>
+        <div class="in">
+          <span class="kicker">PC · Narrative</span>
           <h3>The Neural Timescale</h3>
-          <p>A moody puzzle-mystery told in a repeating time loop. Crack devices through mechanical minigames, then link clues on a corkboard. Time resets, but what you have learned carries forward.</p>
-          <dl>
-            <dt>Platform</dt><dd>PC, narrative</dd>
-            <dt>Skill</dt><dd>Deduction across loops</dd>
-            <dt>Systems</dt><dd>Audio, chemistry and wiring minigames; persistent corkboard</dd>
-            <dt>Inspired by</dt><dd>Outer Wilds</dd>
-          </dl>
+          <p class="soft small">A puzzle-mystery in a repeating time loop. Crack devices through mechanical minigames and link clues on a corkboard. Time resets, but what you learned carries forward.</p>
+          <dl class="meta"><dt>Skill</dt><dd>Deduction across loops</dd><dt>Inspired by</dt><dd>Outer Wilds</dd></dl>
         </div>
       </article>
-
-      <article class="panel level">
+      <article class="wcard">
         <img src="img/nightshift.png" alt="Design deck page for The Night Shift, describing vision cone AI and the coffee cup throw" width="596" height="336">
-        <div class="info">
-          <span class="num">Level 1-3</span>
+        <div class="in">
+          <span class="kicker">Mobile · Stealth</span>
           <h3>The Night Shift</h3>
-          <p>A top-down 2D arcade stealth game. A lone office worker slips past security drones to escape a rogue corporate AI, throwing coffee cups to pull the drones' vision cones away for four seconds.</p>
-          <dl>
-            <dt>Platform</dt><dd>Mobile, stealth</dd>
-            <dt>Skill</dt><dd>Timing under pressure</dd>
-            <dt>Game over</dt><dd>1.5 s in an alert cone, or the timer runs out</dd>
-            <dt>Inspired by</dt><dd>Spider-Man stealth encounters, Office Jerk</dd>
-          </dl>
+          <p class="soft small">A top-down arcade stealth game. An office worker slips past security drones, throwing coffee cups to pull their vision cones away for four seconds.</p>
+          <dl class="meta"><dt>Skill</dt><dd>Timing under pressure</dd><dt>Inspired by</dt><dd>Spider-Man stealth, Office Jerk</dd></dl>
         </div>
       </article>
-    </section>
+    </div>
+  </section>
 
-    <section class="sec">
-      <div class="sec-head">
-        <p class="tag">World 2 · Built and playable</p>
+  <section>
+    <div class="band">
+      <div class="left">
+        <p class="eyebrow">Built and playable</p>
         <h2>Games and level design</h2>
       </div>
-      <div class="grid2">
-        <div class="panel card"><span class="status">Unlocked · Video game</span><h3>Ball Frenzy</h3><p>A fast physics arcade game built around momentum and precision control.</p></div>
-        <div class="panel card"><span class="status">Unlocked · Video game</span><h3>Moth to a Flame</h3><p>An atmospheric game that uses light as its main mechanic, building tension through proximity.</p></div>
-        <div class="panel card"><span class="status">Unlocked · Level design</span><h3>Donkey Kong level</h3><p>A classic platformer level designed around vertical pacing and rhythmic hazards.</p></div>
-        <div class="panel card"><span class="status">Unlocked · Board game</span><h3>Toro2 Mokhtalefa</h3><p>A tabletop strategy game with asymmetric rules and resource management.</p></div>
+      <div class="right">
+        <p class="soft">Things I have taken from an idea to something you can play, on screen and on the table.</p>
       </div>
-      <figure class="panel">
-        <img src="img/sketches.png" alt="Collage of hand-drawn level sketches, a planning board, an illustrated game map and pages from the Design Foundations portfolio" width="596" height="335">
-        <figcaption>From the sketchbook: level sketches, planning boards, a game map and pages from my Design Foundations portfolio (story, music and poster projects).</figcaption>
-      </figure>
-    </section>
-
-    <section class="sec">
-      <div class="sec-head">
-        <p class="tag">World 3 · Web</p>
-        <h2>EasyEnroll course planner</h2>
-      </div>
-      <div class="panel sec">
-        <p>A full-stack web application I designed and developed to take the pain out of course registration. Students plan a semester by dragging courses onto a timetable, and the app catches problems before they do.</p>
-        <dl>
-          <dt>Planning</dt><dd>Drag-and-drop timetable</dd>
-          <dt>Checks</dt><dd>Automatic clash and prerequisite detection</dd>
-          <dt>Sync</dt><dd>Google Calendar integration</dd>
-          <dt>Helper</dt><dd>AI chatbot for semester guidance</dd>
-        </dl>
-      </div>
-    </section>
-
-    <section class="sec">
-      <div class="sec-head">
-        <p class="tag">Inventory</p>
-        <h2>Design toolkit</h2>
-      </div>
-      <div class="grid2">
-        <div class="card"><h4>Design</h4><ul class="chips"><li>Figma</li><li>Photoshop</li><li>Illustrator</li><li>InDesign</li><li>Canva</li></ul></div>
-        <div class="card"><h4>Web</h4><ul class="chips"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul></div>
-        <div class="card"><h4>Games</h4><ul class="chips"><li>Mechanics + rules</li><li>Level design</li><li>Prototyping</li><li>Game engines</li><li>Board games</li></ul></div>
-        <div class="card"><h4>Also</h4><p class="dim">Layout Designer at the AUC Caravan newsletter. Head of HEYA Does. Devcom Scholarship x Gaming Academy, 2024.</p></div>
-      </div>
-    </section>
-  </div>
-
-  <!-- ===================== DEFENDER ===================== -->
-  <div class="world" id="security" role="tabpanel" aria-labelledby="tab-security">
-
-    <section class="sec">
-      <div class="sec-head">
-        <p class="tag">Quest log</p>
-        <h2>Where I have worked</h2>
-      </div>
-      <ul class="quests">
-        <li class="panel quest"><span class="when">Sep 2026 – Dec 2026</span><div class="body"><h3>Etisalat Egypt</h3><span class="role">Information Security Specialist</span><p>Security operations, vulnerability management and attack surface monitoring for a telecom operator, plus compliance reviews against regulator requirements.</p></div></li>
-        <li class="panel quest"><span class="when">Oct 2025 – Dec 2025</span><div class="body"><h3>American University in Cairo</h3><span class="role">Data Privacy Assistant</span><p>Monitored student data records in OneTrust and supported the rollout of new privacy policies across departments.</p></div></li>
-        <li class="panel quest"><span class="when">Nov 2024 – Jun 2025</span><div class="body"><h3>Personal Data Protection Center, MCIT</h3><span class="role">Governance, Risk and Compliance Intern</span><p>Co-developed technical regulatory guidelines aligned with global data-protection standards.</p></div></li>
-        <li class="panel quest"><span class="when">Aug 2024</span><div class="body"><h3>eFinance</h3><span class="role">Information Security Intern</span><p>Reviewed compliance of financial data workflows with the data governance team and shadowed the Security Operations Center.</p></div></li>
-      </ul>
-    </section>
-
-    <section class="sec">
-      <div class="sec-head">
-        <p class="tag">Side quests</p>
-        <h2>Security and hardware builds</h2>
-      </div>
-      <div class="grid2">
-        <div class="panel card"><span class="status">Cleared · Offensive security</span><h3>KRACK attack + fileless malware</h3><p>Demonstrated the WPA2 KRACK attack, then built a fileless malware simulation with in-memory execution, persistence and a custom command-and-control server to study evasion techniques.</p></div>
-        <div class="panel card"><span class="status">Cleared · Hardware</span><h3>RISC-V processor</h3><p>A pipelined RV32I processor in Verilog with forwarding and hazard detection, running on a Nexys A7 FPGA.</p></div>
-        <div class="panel card"><span class="status">Cleared · Simulation</span><h3>Tomasulo simulator</h3><p>A simulator with a real-time interface showing register renaming, branch prediction and performance metrics.</p></div>
-      </div>
-    </section>
-
-    <section class="sec">
-      <div class="sec-head">
-        <p class="tag">Inventory</p>
-        <h2>Security toolkit</h2>
-      </div>
-      <div class="grid2">
-        <div class="card"><h4>Operations</h4><ul class="chips"><li>Vulnerability management</li><li>Incident response</li><li>Threat intelligence</li><li>SIEM</li><li>EDR</li><li>Wireshark</li><li>Nmap</li><li>Burp Suite</li></ul></div>
-        <div class="card"><h4>Governance</h4><ul class="chips"><li>ISO/IEC 27001</li><li>NIST CSF</li><li>MITRE ATT&amp;CK</li><li>GDPR</li><li>Egypt PDPL</li><li>OneTrust</li></ul></div>
-        <div class="card"><h4>Code</h4><ul class="chips"><li>Python</li><li>C++</li><li>JavaScript</li><li>SQL</li><li>Verilog</li></ul></div>
-        <div class="card"><h4>Certifications</h4><p class="dim">Cybersecurity Fundamentals (IBM SkillsBuild). CIPT in progress.</p></div>
-      </div>
-    </section>
-  </div>
-
-  <section class="sec" id="cv">
-    <div class="sec-head">
-      <p class="tag">Save file</p>
-      <h2>Download my CV</h2>
     </div>
-    <div class="save"><a class="btn" href="cv/Zeina_Elsawy_CV_Design.pdf">Design + web CV</a><a class="btn alt" href="cv/Zeina_Elsawy_CV_Security.pdf">Cybersecurity CV</a></div>
+    <div class="tiles">
+      <div class="tile glow"><span class="kicker">Video game</span><h3>Ball Frenzy</h3><p class="small">A fast physics arcade game built around momentum and precision control.</p></div>
+      <div class="tile"><span class="kicker">Video game</span><h3>Moth to a Flame</h3><p class="soft small">An atmospheric game that uses light as its main mechanic, building tension through proximity.</p></div>
+      <div class="tile"><span class="kicker">Level design</span><h3>Donkey Kong level</h3><p class="soft small">A classic platformer level designed around vertical pacing and rhythmic hazards.</p></div>
+      <div class="tile"><span class="kicker">Board game</span><h3>Toro2 Mokhtalefa</h3><p class="soft small">A tabletop strategy game with asymmetric rules and resource management.</p></div>
+    </div>
+    <figure>
+      <img src="img/sketches.png" alt="Collage of hand-drawn level sketches, a planning board, an illustrated game map and pages from the Design Foundations portfolio" width="596" height="335">
+      <figcaption>From the sketchbook: level sketches, planning boards, a game map and pages from my Design Foundations portfolio (story, music and poster projects).</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <div class="feature">
+      <div class="left" style="display:flex;flex-direction:column;gap:1rem">
+        <p class="eyebrow">Web</p>
+        <h2>EasyEnroll course planner</h2>
+        <p class="soft">A full-stack web application I designed and developed to take the pain out of course registration. Students plan a semester by dragging courses onto a timetable, and the app catches problems before they do.</p>
+      </div>
+      <ul>
+        <li><b>Drag-and-drop planning</b><span class="soft small">Build a timetable by moving courses around.</span></li>
+        <li><b>Clash and prerequisite checks</b><span class="soft small">Conflicts are flagged automatically.</span></li>
+        <li><b>Google Calendar integration</b><span class="soft small">The finished schedule goes to your calendar.</span></li>
+        <li><b>AI chatbot</b><span class="soft small">Answers questions about the semester.</span></li>
+      </ul>
+    </div>
+    <div class="skills">
+      <div><span class="kicker">Design tools</span><ul class="chips"><li>Figma</li><li>Photoshop</li><li>Illustrator</li><li>InDesign</li><li>Canva</li></ul></div>
+      <div><span class="kicker">Web</span><ul class="chips"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul></div>
+      <div><span class="kicker">Games</span><ul class="chips"><li>Mechanics and rules</li><li>Level design</li><li>Prototyping</li><li>Game engines</li><li>Board games</li></ul></div>
+    </div>
+  </section>
+
+  <section id="security">
+    <div class="band">
+      <div class="left">
+        <p class="eyebrow">Security and tech</p>
+        <h2>The other half of my work</h2>
+      </div>
+      <div class="right">
+        <p class="big">Information security, data privacy and compliance across telecom, government and financial services.</p>
+      </div>
+    </div>
+    <ul class="jobs">
+      <li><span class="when">Sep 2026 – Dec 2026</span><div class="what"><h3>Etisalat Egypt</h3><span class="role">Information Security Specialist</span><p class="soft">Security operations, vulnerability management and attack surface monitoring for a telecom operator, plus compliance reviews against regulator requirements.</p></div></li>
+      <li><span class="when">Oct 2025 – Dec 2025</span><div class="what"><h3>American University in Cairo</h3><span class="role">Data Privacy Assistant</span><p class="soft">Monitored student data records in OneTrust and supported the rollout of new privacy policies across departments.</p></div></li>
+      <li><span class="when">Nov 2024 – Jun 2025</span><div class="what"><h3>Personal Data Protection Center, MCIT</h3><span class="role">Governance, Risk and Compliance Intern</span><p class="soft">Co-developed technical regulatory guidelines aligned with global data-protection standards.</p></div></li>
+      <li><span class="when">Aug 2024</span><div class="what"><h3>eFinance</h3><span class="role">Information Security Intern</span><p class="soft">Reviewed compliance of financial data workflows with the data governance team and shadowed the Security Operations Center.</p></div></li>
+    </ul>
+    <div class="tiles">
+      <div class="tile"><span class="kicker">Offensive security</span><h3>KRACK attack and fileless malware</h3><p class="soft small">Demonstrated the WPA2 KRACK attack, then built a fileless malware simulation with in-memory execution, persistence and a custom command-and-control server.</p></div>
+      <div class="tile"><span class="kicker">Hardware</span><h3>RISC-V processor</h3><p class="soft small">A pipelined RV32I processor in Verilog with forwarding and hazard detection, running on a Nexys A7 FPGA.</p></div>
+      <div class="tile"><span class="kicker">Simulation</span><h3>Tomasulo simulator</h3><p class="soft small">A simulator with a real-time interface showing register renaming, branch prediction and performance metrics.</p></div>
+    </div>
+    <div class="skills">
+      <div><span class="kicker">Operations</span><ul class="chips"><li>Vulnerability management</li><li>Incident response</li><li>Threat intelligence</li><li>SIEM</li><li>EDR</li><li>Wireshark</li><li>Nmap</li><li>Burp Suite</li></ul></div>
+      <div><span class="kicker">Governance</span><ul class="chips"><li>ISO/IEC 27001</li><li>NIST CSF</li><li>MITRE ATT&amp;CK</li><li>GDPR</li><li>Egypt PDPL</li><li>OneTrust</li></ul></div>
+      <div><span class="kicker">Code and certifications</span><ul class="chips"><li>Python</li><li>C++</li><li>SQL</li><li>Verilog</li><li>IBM Cybersecurity Fundamentals</li><li>CIPT (in progress)</li></ul></div>
+    </div>
+  </section>
+
+  <section id="cv">
+    <div class="band">
+      <div class="left">
+        <p class="eyebrow">CV</p>
+        <h2>Take a copy with you</h2>
+      </div>
+      <div class="right">
+        <p class="soft">Two versions, depending on what you are hiring for.</p><div class="row"><a class="pill ember" href="cv/Zeina_Elsawy_CV_Design.pdf">Design and web CV <i aria-hidden="true">↓</i></a><a class="pill" href="cv/Zeina_Elsawy_CV_Security.pdf">Cybersecurity CV <i aria-hidden="true">↓</i></a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="cta">
+      <p style="font-weight:700">Let's build something together</p>
+      <h2>Get in touch</h2>
+      <span class="mail">Zeinaelsawy04@gmail.com</span>
+      <div class="row">
+        <a class="pill" href="https://linkedin.com/in/zeinaelsawy">LinkedIn <i aria-hidden="true">→</i></a>
+        <a class="pill" href="https://github.com/zeinaelsawy">GitHub <i aria-hidden="true">→</i></a>
+      </div>
+    </div>
   </section>
 
   <footer>
-    <p class="tag">Continue?</p>
-    <h2>Get in touch</h2>
-    <div class="links">
-      <span>Zeinaelsawy04@gmail.com</span>
-      <a href="https://linkedin.com/in/zeinaelsawy">LinkedIn</a>
-      <a href="https://github.com/zeinaelsawy">GitHub</a>
-    </div>
-    <p class="credit">© Zeina Elsawy · Cairo, Egypt · Tip: use ← → to switch class</p>
+    <span>© Zeina Elsawy</span>
+    <span>Cairo, Egypt</span>
   </footer>
 
 </div>
-
-<script>
-(function () {
-  var root = document.documentElement;
-  var tabs = Array.prototype.slice.call(document.querySelectorAll('.class'));
-  var worlds = { design: document.getElementById('design'), security: document.getElementById('security') };
-  root.classList.add('js');
-
-  function show(name, focus) {
-    if (!worlds[name]) name = 'design';
-    tabs.forEach(function (t) {
-      var on = t.dataset.world === name;
-      t.setAttribute('aria-selected', on ? 'true' : 'false');
-      t.tabIndex = on ? 0 : -1;
-      if (on && focus) t.focus();
-    });
-    Object.keys(worlds).forEach(function (k) { worlds[k].hidden = k !== name; });
-  }
-  tabs.forEach(function (t) {
-    t.addEventListener('click', function () {
-      show(t.dataset.world);
-      try { history.replaceState(null, '', '#' + t.dataset.world); } catch (e) {}
-    });
-  });
-  document.addEventListener('keydown', function (e) {
-    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-    var el = document.activeElement;
-    if (el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)) return;
-    var onTab = el && el.classList && el.classList.contains('class');
-    show(e.key === 'ArrowLeft' ? 'design' : 'security', onTab);
-  });
-  function fromHash() {
-    var h = (location.hash || '').replace('#', '');
-    if (worlds[h]) { show(h); document.getElementById('select').scrollIntoView(); }
-  }
-  window.addEventListener('hashchange', fromHash);
-  show('design');
-  fromHash();
-})();
-</script>
 </body>
 </html>
