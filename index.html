@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Portfolio of Zeina Elsawy: game design, web development and cybersecurity.">
+<title>Zeina Elsawy Portfolio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one dark column in the language of her own deck (charcoal ground, heavy caps, short white rules);
+   projects run as wide plates with the artwork beside a spec sheet, like a game design document. */
+:root {
+  color-scheme: dark;
+  --ground: #1f1e1d;
+  --panel: #2a2826;
+  --line: #45413d;
+  --ink: #f3efe8;
+  --muted: #b3aca2;
+  --signal: #f0b54a;
+  --display: "Archivo Black", "Arial Black", Impact, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--ground); color: var(--ink);
+  font-family: var(--body); font-size: 1.0625rem; line-height: 1.6;
+}
+.wrap {
+  max-width: 68rem; margin-inline: auto; padding-block: 3.5rem 4rem;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex; flex-direction: column; gap: 5rem;
+}
+h1, h2, h3 { font-family: var(--display); font-weight: 400; text-transform: uppercase; line-height: 1.02; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2.6rem, 9vw, 6rem); letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.6rem, 4.2vw, 2.5rem); }
+h3 { font-size: clamp(1.25rem, 3vw, 1.7rem); }
+p { margin: 0; max-width: 65ch; }
+a { color: var(--ink); text-underline-offset: 0.2em; }
+a:hover { color: var(--signal); }
+a:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+.rule { width: 8rem; height: 3px; background: var(--ink); }
+.label { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--signal); }
+.muted { color: var(--muted); }
+
+.hero { display: flex; flex-direction: column; gap: 1.5rem; }
+.hero .lede { font-size: 1.2rem; max-width: 52ch; }
+.links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.75rem; font-family: var(--mono); font-size: 0.9rem; }
+.links span { user-select: all; }
+
+section { display: flex; flex-direction: column; gap: 2rem; }
+.head { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.plate { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 2rem; align-items: start; padding-top: 2rem; border-top: 1px solid var(--line); }
+.plate > * { min-width: 0; }
+.plate img { display: block; width: 100%; height: auto; border: 1px solid var(--line); }
+.spec { display: flex; flex-direction: column; gap: 0.9rem; }
+dl { margin: 0; display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 0.45rem 1rem; font-size: 0.95rem; }
+dt { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding-top: 0.2em; }
+dd { margin: 0; }
+
+.built { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 2rem; align-items: start; }
+.built > * { min-width: 0; }
+.built img { display: block; width: 100%; height: auto; border: 1px solid var(--line); }
+.list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.list li { padding-block: 1rem; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 0.3rem; }
+.list li:last-child { border-bottom: 1px solid var(--line); }
+.list strong { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 1.05rem; }
+figcaption { font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem; }
+figure { margin: 0; }
+
+.web { background: var(--panel); border: 1px solid var(--line); padding: 2rem; display: flex; flex-direction: column; gap: 1.25rem; }
+.feat { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 1.25rem 2rem; margin: 0; padding: 0; list-style: none; }
+.feat li { display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.97rem; }
+.feat b { font-weight: 600; }
+
+.tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1.5rem 2rem; }
+.tools div { display: flex; flex-direction: column; gap: 0.35rem; border-top: 3px solid var(--ink); padding-top: 0.8rem; }
+
+img { max-width: 100%; }
+.jump { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.jump a { font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border: 1px solid var(--ink); padding: 0.7rem 1.1rem; }
+.jump a:hover { border-color: var(--signal); }
+.track { display: flex; flex-direction: column; gap: 4rem; }
+.track > .banner { display: flex; flex-direction: column; gap: 0.75rem; border-top: 3px solid var(--ink); padding-top: 1.25rem; }
+.banner h2 { font-size: clamp(2rem, 6vw, 3.6rem); }
+.about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2rem; }
+.about > * { min-width: 0; }
+.when { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); letter-spacing: 0.06em; }
+.cvs { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+@media (max-width: 46rem) { .about { grid-template-columns: minmax(0, 1fr); } .track { gap: 3rem; } }
+footer { display: flex; flex-direction: column; gap: 1rem; border-top: 1px solid var(--line); padding-top: 2rem; }
+
+@media (max-width: 46rem) {
+  .plate, .built { grid-template-columns: minmax(0, 1fr); }
+  dl { grid-template-columns: minmax(0, 1fr); gap: 0.1rem; }
+  dd { margin-bottom: 0.5rem; }
+  .wrap { gap: 3.5rem; }
+  .web { padding: 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="rule"></div>
+    <p class="label">Game design · Web · Cybersecurity</p>
+    <h1>Zeina Elsawy</h1>
+    <p class="lede">I design games, build for the web and work in cybersecurity. I'm finishing a B.Sc. in Cybersecurity with a Minor in Game Design at the American University in Cairo, graduating Spring 2027.</p>
+    <div class="links">
+      <span>Zeinaelsawy04@gmail.com</span>
+      <a href="https://linkedin.com/in/zeinaelsawy">LinkedIn</a>
+      <a href="https://github.com/zeinaelsawy">GitHub</a>
+      <a href="https://canva.link/zeinaelsawygameconcepts">Full design deck</a>
+    </div>
+    <nav class="jump" aria-label="Sections">
+      <a href="#design">Design and games</a>
+      <a href="#security">Security and tech</a>
+      <a href="#cv">CV</a>
+    </nav>
+  </header>
+
+  <section id="about">
+    <div class="head">
+      <p class="label">About</p>
+      <h2>Two sides, one way of working</h2>
+    </div>
+    <div class="about">
+      <p>I study cybersecurity and minor in game design, and I like both for the same reason: each is about understanding a system well enough to shape how people move through it. In games that means rules, levels and feel. In security it means knowing where a system breaks.</p>
+      <p>Alongside my degree I have worked in information security at Etisalat Egypt, in data privacy at AUC and Egypt's Personal Data Protection Center, and at eFinance. I also lay out pages for the AUC Caravan newsletter and lead a student team at HEYA Does.</p>
+    </div>
+  </section>
+
+  <div class="track" id="design">
+    <div class="banner">
+      <p class="label">Track one</p>
+      <h2>Design and games</h2>
+    </div>
+
+  <section>
+    <div class="head">
+      <p class="label">Game design</p>
+      <h3>Three game concepts</h3>
+      <p class="muted">Three original games, each on a different platform and each asking the player for a different skill: spatial teamwork, deduction and timing.</p>
+    </div>
+
+    <article class="plate">
+      <img src="img/daydream.png" alt="Design deck page for Daydream, describing the Desk and the Garden player roles" width="596" height="336">
+      <div class="spec">
+        <h3>Daydream</h3>
+        <p>An asymmetric local co-op puzzle game. One player arranges real desk objects with the mouse while the other platforms through a daydream garden below. Dropping a heavy object on your partner resets the level.</p>
+        <dl>
+          <dt>Platform</dt><dd>PC, two-player co-op</dd>
+          <dt>Core skill</dt><dd>Spatial teamwork and constant communication</dd>
+          <dt>Controls</dt><dd>Mouse drag and scroll for Player 1; WASD, Space and Shift for Player 2</dd>
+          <dt>References</dt><dd>It Takes Two, Monument Valley</dd>
+        </dl>
+      </div>
+    </article>
+
+    <article class="plate">
+      <img src="img/neural.png" alt="Design deck page for The Neural Timescale, describing minigame decryption and the corkboard system" width="596" height="336">
+      <div class="spec">
+        <h3>The Neural Timescale</h3>
+        <p>A moody puzzle-mystery told in a repeating time loop. The player cracks devices through mechanical minigames, then links clues on a corkboard. Time resets, but what the player has learned carries forward.</p>
+        <dl>
+          <dt>Platform</dt><dd>PC, narrative</dd>
+          <dt>Core skill</dt><dd>Deduction across loops</dd>
+          <dt>Systems</dt><dd>Audio, chemistry and wiring minigames; drag-and-pin corkboard that persists between loops</dd>
+          <dt>Reference</dt><dd>Outer Wilds</dd>
+        </dl>
+      </div>
+    </article>
+
+    <article class="plate">
+      <img src="img/nightshift.png" alt="Design deck page for The Night Shift, describing vision cone AI and the coffee cup throw" width="596" height="336">
+      <div class="spec">
+        <h3>The Night Shift</h3>
+        <p>A top-down 2D arcade stealth game. A lone office worker slips past security drones and escapes a rogue corporate AI, throwing coffee cups to pull the drones' vision cones away for four seconds.</p>
+        <dl>
+          <dt>Platform</dt><dd>Mobile, stealth</dd>
+          <dt>Core skill</dt><dd>Timing under pressure</dd>
+          <dt>Lose state</dt><dd>1.5 seconds inside a drone's alert cone, or the overtime timer running out</dd>
+          <dt>References</dt><dd>Spider-Man stealth encounters, Office Jerk</dd>
+        </dl>
+      </div>
+    </article>
+  </section>
+
+  <section>
+    <div class="head">
+      <p class="label">Built and playable</p>
+      <h3>Games and level design</h3>
+    </div>
+    <div class="built">
+      <ul class="list">
+        <li><strong>Ball Frenzy</strong><span>A fast physics arcade game built around momentum and precision control.</span></li>
+        <li><strong>Moth to a Flame</strong><span>An atmospheric game that uses light as its main mechanic, building tension through proximity.</span></li>
+        <li><strong>Donkey Kong level</strong><span>A classic platformer level designed around vertical pacing and rhythmic hazards.</span></li>
+        <li><strong>Toro2 Mokhtalefa</strong><span>A tabletop strategy game with asymmetric rules and resource management.</span></li>
+      </ul>
+      <figure>
+        <img src="img/sketches.png" alt="Collage of hand-drawn level sketches, a planning board, an illustrated game map and pages from the Design Foundations portfolio" width="596" height="335">
+        <figcaption>Level sketches, planning boards, a game map and pages from my Design Foundations portfolio (story, music and poster projects).</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <p class="label">Web</p>
+      <h3>EasyEnroll course planner</h3>
+    </div>
+    <div class="web">
+      <p>A full-stack web application I designed and developed to take the pain out of course registration. Students plan a semester by dragging courses onto a timetable, and the app catches problems before they do.</p>
+      <ul class="feat">
+        <li><b>Drag-and-drop planning</b><span class="muted">Build a timetable by moving courses around.</span></li>
+        <li><b>Clash and prerequisite checks</b><span class="muted">Conflicts are flagged automatically.</span></li>
+        <li><b>Google Calendar integration</b><span class="muted">The finished schedule goes to your calendar.</span></li>
+        <li><b>AI chatbot</b><span class="muted">Answers questions about the semester.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <p class="label">Toolkit</p>
+      <h3>Design toolkit</h3>
+    </div>
+    <div class="tools">
+      <div><span class="label">Design</span><span>Figma, Adobe Photoshop, Illustrator and InDesign, Canva</span></div>
+      <div><span class="label">Web</span><span>HTML, CSS, JavaScript</span></div>
+      <div><span class="label">Games</span><span>Mechanics and rules, level design, prototyping, game engines, board games</span></div>
+      <div><span class="label">Also</span><span>Layout Designer at the AUC Caravan newsletter; Devcom Scholarship x Gaming Academy, 2024</span></div>
+    </div>
+  </section>
+
+  </div>
+
+  <div class="track" id="security">
+    <div class="banner">
+      <p class="label">Track two</p>
+      <h2>Security and tech</h2>
+    </div>
+
+    <section>
+      <div class="head">
+        <p class="label">Experience</p>
+        <h3>Where I have worked</h3>
+      </div>
+      <ul class="list">
+        <li><span class="when">Sep 2026 – Dec 2026</span><strong>Etisalat Egypt</strong><span>Information Security Specialist. Security operations, vulnerability management and attack surface monitoring for a telecom operator, plus compliance reviews against regulator requirements.</span></li>
+        <li><span class="when">Oct 2025 – Dec 2025</span><strong>American University in Cairo</strong><span>Data Privacy Assistant. Monitored student data records in OneTrust and supported the rollout of new privacy policies across departments.</span></li>
+        <li><span class="when">Nov 2024 – Jun 2025</span><strong>Personal Data Protection Center, MCIT</strong><span>Governance, Risk and Compliance Intern. Co-developed technical regulatory guidelines aligned with global data-protection standards.</span></li>
+        <li><span class="when">Aug 2024</span><strong>eFinance</strong><span>Information Security Intern. Reviewed compliance of financial data workflows with the data governance team and shadowed the Security Operations Center.</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <div class="head">
+        <p class="label">Projects</p>
+        <h3>Security and hardware builds</h3>
+      </div>
+      <ul class="list">
+        <li><strong>KRACK attack and fileless malware simulation</strong><span>Demonstrated the WPA2 KRACK attack, then built a fileless malware simulation with in-memory execution, persistence and a custom command-and-control server to study evasion techniques.</span></li>
+        <li><strong>RISC-V processor</strong><span>A pipelined RV32I processor in Verilog with forwarding and hazard detection, running on a Nexys A7 FPGA.</span></li>
+        <li><strong>Tomasulo's Algorithm simulator</strong><span>A simulator with a real-time interface showing register renaming, branch prediction and performance metrics.</span></li>
+      </ul>
+    </section>
+
+    <section>
+      <div class="head">
+        <p class="label">Knowledge</p>
+        <h3>Security toolkit</h3>
+      </div>
+      <div class="tools">
+        <div><span class="label">Operations</span><span>Vulnerability management, incident response, threat intelligence, SIEM, EDR, Wireshark, Nmap, Burp Suite</span></div>
+        <div><span class="label">Governance</span><span>ISO/IEC 27001, NIST CSF, MITRE ATT&amp;CK, GDPR, Egypt's Personal Data Protection Law, OneTrust</span></div>
+        <div><span class="label">Code</span><span>Python, C++, JavaScript, SQL, Verilog</span></div>
+        <div><span class="label">Certifications</span><span>Cybersecurity Fundamentals (IBM SkillsBuild); CIPT in progress</span></div>
+      </div>
+    </section>
+  </div>
+
+  <section id="cv">
+    <div class="head">
+      <p class="label">CV</p>
+      <h2>Download my CV</h2>
+    </div>
+    <div class="jump cvs"><a href="cv/Zeina_Elsawy_CV_Design.pdf">Design and web CV (PDF)</a><a href="cv/Zeina_Elsawy_CV_Security.pdf">Cybersecurity CV (PDF)</a></div>
+  </section>
+
+  <footer>
+    <div class="rule"></div>
+    <h2>Get in touch</h2>
+    <div class="links">
+      <span>Zeinaelsawy04@gmail.com</span>
+      <a href="https://linkedin.com/in/zeinaelsawy">LinkedIn</a>
+      <a href="https://github.com/zeinaelsawy">GitHub</a>
+    </div>
+    <p class="muted">Cairo, Egypt</p>
+  </footer>
+
+</div>
+</body>
+</html>
